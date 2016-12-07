@@ -52,7 +52,15 @@ module coffee_tamper(h,
     }
   
     // Rounding between handle and sphere if overhang is greater than 45
-    if (2*handle_r*handle_r < sphere_r*sphere_r) {
+    if (sphere_r + handle_r > sqrt(2) * sphere_r) {
+      x = sqrt(4*sphere_r*sphere_r-(sphere_r+handle_r)*(sphere_r+handle_r));
+      translate([handle_r + sphere_r, h - sphere_r - x]) {
+        difference() {
+          translate([-sphere_r, 0]) square([sphere_r, x/2]);
+          circle(r=sphere_r);
+        }
+      }
+    } else {
       tr = (sphere_r - sqrt(2) * handle_r) / (sqrt(2) - 1);
       translate([handle_r+tr, h - sphere_r - (sphere_r + tr) / sqrt(2)]) {
         difference() {
