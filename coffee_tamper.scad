@@ -71,5 +71,3 @@ module coffee_tamper(h,
     }
   }
 }
-
-coffee_tamper(h=50, bd=47, hd=10);
